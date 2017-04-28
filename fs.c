@@ -526,8 +526,11 @@ dirlookup(struct inode *dp, char *name, uint *poff)
   if(dp->type != T_DIR){
     if(dp->type != T_SMALLDIR){
     panic("dirlookup not DIR");
+    }
   }
-}
+  if (dp->type == T_SMALLDIR) {
+    return 0;
+  }
   for(off = 0; off < dp->size; off += sizeof(de)){
     if(readi(dp, (char*)&de, off, sizeof(de)) != sizeof(de))
       panic("dirlink read");
@@ -538,7 +541,6 @@ dirlookup(struct inode *dp, char *name, uint *poff)
       if(poff)
         *poff = off;
       inum = de.inum;
-      cprintf("there\n");
       return iget(dp->dev, inum);
     }
   }
