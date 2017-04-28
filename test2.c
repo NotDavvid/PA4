@@ -47,8 +47,8 @@ writetest(void)
     printf(stdout, "error: open small failed!\n");
     exit();
   }
-  i = read(fd, buf, 2000);
-  if(i == 2000){
+  i = read(fd, buf, 10);
+  if(i == 10){
     printf(stdout, "read succeeded ok\n");
   } else {
     printf(stdout, "read failed\n");
