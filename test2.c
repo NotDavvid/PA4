@@ -31,6 +31,7 @@ writetest(void)
     printf(stdout, "error: create small failed!\n");
     exit();
   }
+
 	printf(stdout, "writing\n");
 	for(i = 0; i < 10; i++){
     if(write(fd, "aaaaaaaaaa", 10) != 10){
