@@ -394,7 +394,7 @@ sys_mkdir(void)
 }
 
 int
-sys_mkSmallFilesdir(void)
+mkSmallFilesdir(void)
 {
   char *path;
   struct inode *ip;
