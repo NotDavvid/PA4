@@ -334,6 +334,7 @@ sys_open(void)
   begin_op();
 
   if(omode & O_CREATE){
+    char name[DIRSIZ];
   ip = create(path, T_FILE, 0, 0);
   struct inode *dp = nameiparent(path, name);
 
