@@ -398,6 +398,7 @@ itrunc(struct inode *ip)
   uint *a;
 
   for(i = 0; i < NDIRECT; i++){
+    cprintf("h1");
     if(ip->addrs[i]){
       bfree(ip->dev, ip->addrs[i]);
       ip->addrs[i] = 0;
@@ -405,6 +406,7 @@ itrunc(struct inode *ip)
   }
 
   if(ip->addrs[NDIRECT]){
+    cprintf("h2");
     bp = bread(ip->dev, ip->addrs[NDIRECT]);
     a = (uint*)bp->data;
     for(j = 0; j < NINDIRECT; j++){

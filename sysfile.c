@@ -205,7 +205,7 @@ sys_unlink(void)
   }
 
   ilock(dp);
-  cprintf("there1\n");
+
   // Cannot unlink "." or "..".
   if(namecmp(name, ".") == 0 || namecmp(name, "..") == 0)
     goto bad;
@@ -213,21 +213,21 @@ sys_unlink(void)
   if((ip = dirlookup(dp, name, &off)) == 0)
     goto bad;
   ilock(ip);
-cprintf("there2\n");
+
   if(ip->nlink < 1)
     panic("unlink: nlink < 1");
-cprintf("there3\n");
+
   if(ip->type == T_DIR && !isdirempty(ip)){
     iunlockput(ip);
     goto bad;
   }
-  cprintf("there4\n");
+
   if(ip->type == T_SMALLDIR && !isdirempty(ip)){
-    cprintf("there5\n");
+
     iunlockput(ip);
     goto bad;
   }
-cprintf("there6\n");
+
   memset(&de, 0, sizeof(de));
   if(writei(dp, (char*)&de, off, sizeof(de)) != sizeof(de))
     panic("unlink: writei");
@@ -237,7 +237,7 @@ cprintf("there6\n");
   }
 
   if(ip->type == T_SMALLDIR){
-    cprintf("there7\n");
+
     dp->nlink--;
     iupdate(dp);
   }
@@ -245,9 +245,9 @@ cprintf("there6\n");
   iunlockput(dp);
 
   ip->nlink--;
-  cprintf("there8\n");
+
   iupdate(ip);
-  cprintf("there%d8.5\n",ip->nlink);
+
   iunlockput(ip);
 cprintf("there9\n");
   end_op();
@@ -257,7 +257,6 @@ cprintf("there9\n");
 bad:
   iunlockput(dp);
   end_op();
-  cprintf("iiii1\n");
   return -1;
 }
 
