@@ -216,12 +216,14 @@ sys_unlink(void)
 cprintf("there2\n");
   if(ip->nlink < 1)
     panic("unlink: nlink < 1");
-
+cprintf("there3\n");
   if(ip->type == T_DIR && !isdirempty(ip)){
     iunlockput(ip);
     goto bad;
   }
+  cprintf("there4\n");
   if(ip->type == T_SMALLDIR && !isdirempty(ip)){
+    cprintf("there5\n");
     iunlockput(ip);
     goto bad;
   }
