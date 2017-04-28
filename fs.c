@@ -338,6 +338,7 @@ void
 iunlockput(struct inode *ip)
 {
   iunlock(ip);
+  cprintf("herer\n");
   iput(ip);
 }
 
