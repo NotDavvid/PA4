@@ -490,7 +490,6 @@ if(ip->type == T_SMALLFILE){
     for(tot=0; tot<n; tot+=m, off+=m, src+=m){
       bp = bread(ip->dev, bmap(ip, off/BSIZE));
       m = min(n - tot, BSIZE - off%BSIZE);
-      memmove((char *)(ip->addrs) + off, src, n);
       memmove(bp->data + off%BSIZE, src, m);
       log_write(bp);
       brelse(bp);
