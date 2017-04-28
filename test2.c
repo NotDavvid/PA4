@@ -48,9 +48,9 @@ writetest(void)
   }
   i = read(fd, buf, 10);
   if(i == 10){
-    printf(stdout, "read succeeded ok\n");
+    printf(stdout, "read succeeded ok %d\n", i);
   } else {
-    printf(stdout, "read failed\n");
+    printf(stdout, "read failed %d\n", i);
     exit();
   }
   close(fd);
