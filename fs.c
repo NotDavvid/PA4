@@ -93,9 +93,9 @@ bfree(int dev, uint b)
   if((bp->data[bi/8] & m) == 0)
     panic("freeing free block");
   bp->data[bi/8] &= ~m;
-  cprintf("h8\n");
+  cprintf("h5\n");
   log_write(bp);
-  cprintf("h9\n");
+  cprintf("h5\n");
   brelse(bp);
 }
 
@@ -459,7 +459,7 @@ readi(struct inode *ip, char *dst, uint off, uint n)
   if(off + n > ip->size)
     n = ip->size - off;
 
-  if(ip->type == T_SMALLFILE){
+  if(ip->type == T_SFILE){
     memmove(dst, (char *)(ip->addrs) + off, n);
     cprintf("small file read\n");
   } else {
@@ -498,11 +498,11 @@ writei(struct inode *ip, char *src, uint off, uint n)
     return -1;
   if(off + n > MAXFILE*BSIZE)
     return -1;
-if(ip->type==T_SMALLFILE && off +n>(NDIRECT+1)*sizeof(uint)){
+if(ip->type==T_SFILE && off +n>(NDIRECT+1)*sizeof(uint)){
   cprintf("toobig");
   return -1;
 }
-if(ip->type == T_SMALLFILE){
+if(ip->type == T_SFILE){
   memmove((char *)(ip->addrs) + off, src, n);
   off += n;
 } else{
@@ -515,7 +515,7 @@ if(ip->type == T_SMALLFILE){
   }
 }
 
-  if(ip->type == T_SMALLFILE || (n > 0 && off > ip->size)){
+  if(ip->type == T_SFILE || (n > 0 && off > ip->size)){
     if(n > 0 && off > ip->size){
       ip->size = off;
       iupdate(ip);
@@ -541,7 +541,7 @@ dirlookup(struct inode *dp, char *name, uint *poff)
   uint off, inum;
   struct dirent de;
 
-  if(dp->type != T_DIR && dp->type != T_SMALLDIR){
+  if(dp->type != T_DIR && dp->type != T_SDIR){
     panic("dirlookup not DIR");
   }
 
@@ -648,7 +648,7 @@ namex(char *path, int nameiparent, char *name)
 
   while((path = skipelem(path, name)) != 0){
     ilock(ip);
-    if(ip->type != T_DIR && ip->type != T_SMALLDIR){
+    if(ip->type != T_DIR && ip->type != T_SDIR){
       iunlockput(ip);
       return 0;
     }

@@ -137,7 +137,7 @@ sys_link(void)
     return -1;
   }
 
-  if(ip->type == T_SMALLDIR){
+  if(ip->type == T_SDIR){
     iunlockput(ip);
     end_op();
     return -1;
@@ -222,7 +222,7 @@ sys_unlink(void)
     goto bad;
   }
 
-  if(ip->type == T_SMALLDIR && !isdirempty(ip)){
+  if(ip->type == T_SDIR && !isdirempty(ip)){
 
     iunlockput(ip);
     goto bad;
@@ -236,7 +236,7 @@ sys_unlink(void)
     iupdate(dp);
   }
 
-  if(ip->type == T_SMALLDIR){
+  if(ip->type == T_SDIR){
 
     dp->nlink--;
     iupdate(dp);
@@ -276,9 +276,9 @@ create(char *path, short type, short major, short minor)
       if(type == T_FILE && ip->type == T_FILE){
         return ip;
       }
-      if(type == T_SMALLDIR && ip->type == T_SMALLDIR)
+      if(type == T_SDIR && ip->type == T_SDIR)
         return ip;
-      if(type == T_SMALLFILE && ip->type == T_SMALLFILE)
+      if(type == T_SFILE && ip->type == T_SFILE)
         return ip;
         cprintf("here8\n");
       iunlockput(ip);
@@ -303,7 +303,7 @@ create(char *path, short type, short major, short minor)
       panic("create dotsz");
   }
 
-  if(type == T_SMALLDIR){  // Create . and .. entries.
+  if(type == T_SDIR){  // Create . and .. entries.
     cprintf("here2\n");
     dp->nlink++;  // for ".."
     iupdate(dp);
@@ -337,12 +337,12 @@ sys_open(void)
     if(omode & O_SMALLFILE){
       char name[DIRSIZ];
       struct inode *dp = nameiparent(path, name);
-      if(dp->type != T_SMALLDIR){
+      if(dp->type != T_SDIR){
         cprintf("NONONO");
         end_op();
         return -1;
       }
-      if((ip = create(path, T_SMALLFILE, 0, 0)) == 0){
+      if((ip = create(path, T_SFILE, 0, 0)) == 0){
         end_op();
         return -1;
       }
@@ -350,7 +350,7 @@ sys_open(void)
     } else {
       char name[DIRSIZ];
       struct inode *dp = nameiparent(path, name);
-      if(dp->type == T_SMALLDIR){
+      if(dp->type == T_SDIR){
         cprintf("nononon");
         end_op();
         return -1;
@@ -372,7 +372,7 @@ sys_open(void)
       end_op();
       return -1;
     }
-    if(ip->type == T_SMALLDIR && omode != O_RDONLY){
+    if(ip->type == T_SDIR && omode != O_RDONLY){
       iunlockput(ip);
       end_op();
       return -1;
@@ -447,7 +447,7 @@ sys_chdir(void)
   }
   ilock(ip);
   if(ip->type != T_DIR){
-    if(ip->type != T_SMALLDIR){
+    if(ip->type != T_SDIR){
       iunlockput(ip);
       end_op();
       return -1;
@@ -567,7 +567,7 @@ currentm(void)
   struct inode *ip;
 
   begin_op();
-  if(argstr(0, &path) < 0 || (ip = create(path, T_SMALLDIR, 0, 0)) == 0){
+  if(argstr(0, &path) < 0 || (ip = create(path, T_SDIR, 0, 0)) == 0){
     end_op();
     return -1;
   }
@@ -582,7 +582,7 @@ int sys_mkSmallFilesdir(void)
   struct inode *ip;
 
   begin_op();
-  if(argstr(0, &path) < 0 || (ip = create(path, T_SMALLDIR, 0, 0)) == 0){
+  if(argstr(0, &path) < 0 || (ip = create(path, T_SDIR, 0, 0)) == 0){
     end_op();
     return -1;
   }
