@@ -487,10 +487,8 @@ writei(struct inode *ip, char *src, uint off, uint n)
     return -1;
 
 if(ip->type == T_SMALLFILE){
-  bp = bread(ip->dev, bmap(ip, NINDIRECT));
   memmove((char *)(ip->addrs) + off, src, n);
-  log_write(bp);
-  brelse(bp);
+  off += n;
 } else{
     for(tot=0; tot<n; tot+=m, off+=m, src+=m){
       bp = bread(ip->dev, bmap(ip, off/BSIZE));
@@ -501,9 +499,11 @@ if(ip->type == T_SMALLFILE){
   }
 }
 
-  if(n > 0 && off > ip->size){
-    ip->size = off;
-    iupdate(ip);
+  if(ip->type == T_SMALLFILE || (n > 0 && off > ip->size)){
+    if(n > 0 && off > ip->size){
+      ip->size = off;
+      iupdate(ip);
+    }
   }
   return n;
 }
