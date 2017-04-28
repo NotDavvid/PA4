@@ -24,7 +24,7 @@ writetest(void)
     exit();
   }
   printf(stdout, "small file test\n");
-  fd = open("small", O_CREATE|O_SMALLFILE|O_RDWR);
+  fd = open("small", O_CREATE|O_SFILE|O_RDWR);
   if(fd >= 0){
     printf(stdout, "create small succeeded; ok\n");
   } else {
