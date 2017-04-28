@@ -32,11 +32,16 @@ writetest(void)
     exit();
   }
 	//printf(stdout, "writing\n");
-	if(write(fd, "aaaaaaaaaa", 10) != 10){
-    printf(stdout, "error: write aa %d new file failed\n", 10);
-    exit();
-	}
-
+	for(i = 0; i < 10; i++){
+    if(write(fd, "aaaaaaaaaa", 10) != 10){
+      printf(stdout, "error: write aa %d new file failed\n", i);
+      exit();
+    }
+    if(write(fd, "bbbbbbbbbb", 10) != 10){
+      printf(stdout, "error: write bb %d new file failed\n", i);
+      exit();
+    }
+  }
   printf(stdout, "writes ok\n");
   close(fd);
   fd = open("small", O_RDONLY);
