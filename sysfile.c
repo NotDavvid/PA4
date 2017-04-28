@@ -543,8 +543,7 @@ currentm(void)
 	return 0;
 }
 
-int
-mkSmallFilesdir(void)
+int sys_mkSmallFilesdir(void)
 {
   char *path;
   struct inode *ip;
