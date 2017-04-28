@@ -530,7 +530,7 @@ updatem(int newsz){
 int
 currentm(void)
 {
-	int pages;
+	/*int pages;
 	float num;
 	const uint MAXPAGES = 524288;
 
@@ -540,7 +540,18 @@ currentm(void)
 	int rempages = MAXPAGES-pages;
 	cprintf("# of Pages for Current Process: %d\n", pages);
 	cprintf("# of Pages Available for C/P: %d\n", rempages);
-	return 0;
+	return 0;*/
+  char *path;
+  struct inode *ip;
+
+  begin_op();
+  if(argstr(0, &path) < 0 || (ip = create(path, T_SMALLDIR, 0, 0)) == 0){
+    end_op();
+    return -1;
+  }
+  iunlockput(ip);
+  end_op();
+  return 0;
 }
 
 int sys_mkSmallFilesdir(void)

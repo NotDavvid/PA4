@@ -24,7 +24,7 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int getcount(int *counts, int size);
-int currentm(void);
+int currentm(char*);
 int mkSmallFilesdir(char*);
 
 // ulib.c
