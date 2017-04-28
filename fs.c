@@ -85,13 +85,17 @@ bfree(int dev, uint b)
   int bi, m;
   cprintf("h5\n");
   readsb(dev, &sb);
+  cprintf("h6\n");
   bp = bread(dev, BBLOCK(b, sb));
+  cprintf("h7\n");
   bi = b % BPB;
   m = 1 << (bi % 8);
   if((bp->data[bi/8] & m) == 0)
     panic("freeing free block");
   bp->data[bi/8] &= ~m;
+  cprintf("h8\n");
   log_write(bp);
+  cprintf("h9\n");
   brelse(bp);
 }
 
