@@ -60,7 +60,7 @@ writetest(void)
     exit();
   }
   close(fd);
-	printf("close succeeded");
+	printf(1, "close succeeded");
 
   if(unlink("small") < 0){
     printf(stdout, "unlink small failed\n");
