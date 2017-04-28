@@ -398,8 +398,9 @@ itrunc(struct inode *ip)
   uint *a;
 
   for(i = 0; i < NDIRECT; i++){
-    cprintf("h1");
+    cprintf("h1\n");
     if(ip->addrs[i]){
+      cprintf("h4\n");
       bfree(ip->dev, ip->addrs[i]);
       ip->addrs[i] = 0;
     }
