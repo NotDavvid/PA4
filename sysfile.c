@@ -350,37 +350,6 @@ sys_open(void)
       return -1;
     }
   }
-  //check for size of file
-  /*
-  if(omode & O_SMALLFILE){
-    if(omode & O_CREATE){
-      char name[DIRSIZE];
-      struct inode *dp = nameiparent(path, name);
-      if(dp->type == T_SMALLDIR){
-        ip = create(path, T_SMALLFILE, 0, 0);
-        if(ip == 0){
-          end_op();
-          return -1;
-        }
-      } else {
-        cprintf("Cannot open a small file in this directory");
-        end_op();
-        return -1;
-      }
-    } else {
-      if((ip = namei(path)) == 0){
-        end_op();
-        return -1;
-      }
-      ilock(ip);
-      if(ip->type == T_DIR && omode != O_RDONLY){
-        iunlockput(ip);
-        end_op();
-        return -1;
-      }
-    }
-  }
-*/
 
   if((f = filealloc()) == 0 || (fd = fdalloc(f)) < 0){
     if(f)
