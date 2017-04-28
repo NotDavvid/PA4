@@ -37,7 +37,7 @@ writetest(void)
       printf(stdout, "error: write aa %d new file failed\n", i);
       exit();
     }
-  }
+
   printf(stdout, "writes ok\n");
   close(fd);
   fd = open("small", O_RDONLY);
