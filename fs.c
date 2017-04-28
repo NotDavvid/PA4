@@ -321,11 +321,12 @@ iput(struct inode *ip)
 {
   acquire(&icache.lock);
   if(ip->ref == 1 && (ip->flags & I_VALID) && ip->nlink == 0){
-    cprintf("free\n");
+
     // inode has no links and no other references: truncate and free.
     release(&icache.lock);
     cprintf("th8\n");
     itrunc(ip);
+    cprintf("th9\n");
 
     ip->type = 0;
     iupdate(ip);
@@ -411,6 +412,8 @@ itrunc(struct inode *ip)
         bfree(ip->dev, a[j]);
     }
     brelse(bp);
+    cprintf("th10\n");
+
     bfree(ip->dev, ip->addrs[NDIRECT]);
     ip->addrs[NDIRECT] = 0;
   }
