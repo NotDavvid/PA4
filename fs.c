@@ -528,9 +528,7 @@ dirlookup(struct inode *dp, char *name, uint *poff)
     panic("dirlookup not DIR");
     }
   }
-  if (dp->type == T_SMALLDIR) {
-    return 0;
-  }
+
   for(off = 0; off < dp->size; off += sizeof(de)){
     if(readi(dp, (char*)&de, off, sizeof(de)) != sizeof(de))
       panic("dirlink read");
@@ -559,7 +557,6 @@ dirlink(struct inode *dp, char *name, uint inum)
   // Check that name is not present.
   if((ip = dirlookup(dp, name, 0)) != 0){
     iput(ip);
-    cprintf("here3\n");
     return -1;
   }
 
