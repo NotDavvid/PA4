@@ -528,7 +528,6 @@ dirlookup(struct inode *dp, char *name, uint *poff)
     panic("dirlookup not DIR");
   }
 }
-  cprintf("there\n");
   for(off = 0; off < dp->size; off += sizeof(de)){
     if(readi(dp, (char*)&de, off, sizeof(de)) != sizeof(de))
       panic("dirlink read");
@@ -539,6 +538,7 @@ dirlookup(struct inode *dp, char *name, uint *poff)
       if(poff)
         *poff = off;
       inum = de.inum;
+      cprintf("there\n");
       return iget(dp->dev, inum);
     }
   }
