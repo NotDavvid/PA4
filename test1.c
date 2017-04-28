@@ -2,16 +2,16 @@
 #include "user.h"
 #include "syscall.h"
 #include "stat.h"
-#include "stdio.h"
+#include "fcntl.h"
+
+#define N 100
+
+
 
 
 int
-main(int argc, char *argv[])
+main(void)
 {
-	FILE *fp = NULL;
-	printf(1, "Create a normal file using fopen()\n");
-	fp = fopen("test1.txt", "test1");
-	fclose(fp);
-	exit();
-
+		
+    exit();
 }
