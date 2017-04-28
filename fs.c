@@ -491,7 +491,10 @@ writei(struct inode *ip, char *src, uint off, uint n)
     return -1;
   if(off + n > MAXFILE*BSIZE)
     return -1;
-
+if(ip->type==T_SMALLFILE && off +n>(NDIRECT+1)*sizeof(unit)){
+  cprintf("toobig");
+  return -1;
+}
 if(ip->type == T_SMALLFILE){
   memmove((char *)(ip->addrs) + off, src, n);
   off += n;
