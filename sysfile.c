@@ -246,12 +246,13 @@ sys_unlink(void)
   iunlockput(ip);
 
   end_op();
-
+  cprintf("0\n");
   return 0;
 
 bad:
   iunlockput(dp);
   end_op();
+  cprintf("-1\n");
   return -1;
 }
 
