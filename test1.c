@@ -14,12 +14,12 @@ writetest(void)
   int fd;
   int i;
 
-  printf(stdout, "small file test\n");
-  fd = open("small", O_CREATE|O_RDWR);
+  printf(stdout, "normal file test\n");
+  fd = open("normal", O_CREATE|O_RDWR);
   if(fd >= 0){
-    printf(stdout, "create small succeeded; ok\n");
+    printf(stdout, "create normal succeeded; ok\n");
   } else {
-    printf(stdout, "error: creat small failed!\n");
+    printf(stdout, "error: creat normal failed!\n");
     exit();
   }
 	//printf(stdout, "writing\n");
@@ -37,9 +37,9 @@ writetest(void)
   close(fd);
   fd = open("small", O_RDONLY);
   if(fd >= 0){
-    printf(stdout, "open small succeeded ok\n");
+    printf(stdout, "open normal succeeded ok\n");
   } else {
-    printf(stdout, "error: open small failed!\n");
+    printf(stdout, "error: open normal failed!\n");
     exit();
   }
   i = read(fd, buf, 2000);
@@ -52,10 +52,10 @@ writetest(void)
   close(fd);
 
   if(unlink("small") < 0){
-    printf(stdout, "unlink small failed\n");
+    printf(stdout, "unlink normal failed\n");
     exit();
   }
-  printf(stdout, "small file test ok\n");
+  printf(stdout, "normal file test ok\n");
 }
 
 int
