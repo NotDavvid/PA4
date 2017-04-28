@@ -44,7 +44,7 @@ writetest(void)
   }
   i = read(fd, buf, 200);
   if(i == 200){
-    printf(stdout, "read succeeded ok\n");
+    printf(stdout, "read succeeded ok%s\n",buf);
   } else {
     printf(stdout, "read failed\n");
     exit();
