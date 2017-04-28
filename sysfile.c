@@ -220,11 +220,19 @@ sys_unlink(void)
     iunlockput(ip);
     goto bad;
   }
+  if(ip->type == T_SMALLDIR && !isdirempty(ip)){
+    iunlockput(ip);
+    goto bad;
+  }
 
   memset(&de, 0, sizeof(de));
   if(writei(dp, (char*)&de, off, sizeof(de)) != sizeof(de))
     panic("unlink: writei");
   if(ip->type == T_DIR){
+    dp->nlink--;
+    iupdate(dp);
+  }
+  if(ip->type == T_SMALLDIR){
     dp->nlink--;
     iupdate(dp);
   }
@@ -255,7 +263,6 @@ create(char *path, short type, short major, short minor)
     return 0;
   ilock(dp);
   if((ip = dirlookup(dp, name, &off)) != 0){
-    cprintf("test\n");
       iunlockput(dp);
       ilock(ip);
       if(type == T_FILE && ip->type == T_FILE){
@@ -263,7 +270,7 @@ create(char *path, short type, short major, short minor)
       }
       if(type == T_SMALLDIR && ip->type == T_SMALLDIR)
         return ip;
-        
+
       iunlockput(ip);
       return 0;
     }
