@@ -37,10 +37,6 @@ writetest(void)
       printf(stdout, "error: write aa %d new file failed\n", i);
       exit();
     }
-    if(write(fd, "bbbbbbbbbb", 10) != 10){
-      printf(stdout, "error: write bb %d new file failed\n", i);
-      exit();
-    }
   }
   printf(stdout, "writes ok\n");
   close(fd);
