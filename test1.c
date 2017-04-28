@@ -13,7 +13,15 @@ writetest(void)
 {
   int fd;
   int i;
-
+  char* test = "iputdirN";
+  if(currentm(test) < 0){
+    printf(stdout, "mkSmallFilesdir failed\n");
+    exit();
+  }
+  if(chdir("iputdirN") < 0){
+    printf(stdout, "chdir iputdir failed\n");
+    exit();
+  }
   printf(stdout, "normal file test\n");
   fd = open("normal", O_CREATE|O_RDWR);
   if(fd >= 0){
