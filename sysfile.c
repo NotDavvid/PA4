@@ -290,7 +290,7 @@ create(char *path, short type, short major, short minor)
     iupdate(dp);
     // No ip->nlink++ for ".": avoid cyclic ref count.
     if(dirlink(ip, ".", ip->inum) < 0 || dirlink(ip, "..", dp->inum) < 0)
-      panic("create dots");
+      panic("create dotsz");
   }
 
   if(type == T_SMALLDIR){  // Create . and .. entries.
