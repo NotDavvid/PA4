@@ -32,7 +32,7 @@ writetest(void)
     exit();
   }
 	//printf(stdout, "writing\n");
-  for(i = 0; i < 100; i++){
+  for(i = 0; i < 1; i++){
     if(write(fd, "aaaaaaaaaa", 10) != 10){
       printf(stdout, "error: write aa %d new file failed\n", i);
       exit();
