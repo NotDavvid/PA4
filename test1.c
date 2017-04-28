@@ -17,11 +17,12 @@ writetest(void)
   printf(stdout, "small file test\n");
   fd = open("small", O_CREATE|O_RDWR);
   if(fd >= 0){
-    printf(stdout, "creat small succeeded; ok\n");
+    printf(stdout, "create small succeeded; ok\n");
   } else {
     printf(stdout, "error: creat small failed!\n");
     exit();
   }
+	printf(stdout, "writing\n");
   for(i = 0; i < 100; i++){
     if(write(fd, "aaaaaaaaaa", 10) != 10){
       printf(stdout, "error: write aa %d new file failed\n", i);
