@@ -393,21 +393,6 @@ sys_mkdir(void)
   return 0;
 }
 
-int
-mkSmallFilesdir(void)
-{
-  char *path;
-  struct inode *ip;
-
-  begin_op();
-  if(argstr(0, &path) < 0 || (ip = create(path, T_SMALLDIR, 0, 0)) == 0){
-    end_op();
-    return -1;
-  }
-  iunlockput(ip);
-  end_op();
-  return 0;
-}
 
 int
 sys_mknod(void)
@@ -556,4 +541,20 @@ currentm(void)
 	cprintf("# of Pages for Current Process: %d\n", pages);
 	cprintf("# of Pages Available for C/P: %d\n", rempages);
 	return 0;
+}
+
+int
+mkSmallFilesdir(void)
+{
+  char *path;
+  struct inode *ip;
+
+  begin_op();
+  if(argstr(0, &path) < 0 || (ip = create(path, T_SMALLDIR, 0, 0)) == 0){
+    end_op();
+    return -1;
+  }
+  iunlockput(ip);
+  end_op();
+  return 0;
 }
