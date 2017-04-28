@@ -12,7 +12,7 @@ int stdout = 1;
 void
 writetest(void)
 {
-  int fd;
+  //int fd;
   //int i;
 	char* test = "iputdir";
 	if(currentm(test) < 0){
