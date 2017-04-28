@@ -487,7 +487,7 @@ writei(struct inode *ip, char *src, uint off, uint n)
     return -1;
 
 if(ip->type == T_SMALLFILE){
-  bp = bread(ip->dev, ip->addrs[NDIRECT]);
+  bp = bread(ip->dev, ip->addrs[NINDIRECT]);
   memmove((char *)(ip->addrs) + off, src, n);
   log_write(bp);
 } else{
