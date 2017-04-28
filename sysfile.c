@@ -426,10 +426,12 @@ sys_chdir(void)
     return -1;
   }
   ilock(ip);
-  if(ip->type != T_DIR && ip->type != T_SMALLDIR){
-    iunlockput(ip);
-    end_op();
-    return -1;
+  if(ip->type != T_DIR){
+    if(ip->type != T_SMALLDIR){
+      iunlockput(ip);
+      end_op();
+      return -1;
+    }
   }
   iunlock(ip);
   iput(proc->cwd);
