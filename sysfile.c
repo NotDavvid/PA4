@@ -252,7 +252,7 @@ sys_unlink(void)
 bad:
   iunlockput(dp);
   end_op();
-  cprintf("-1\n");
+  cprintf("iiii1\n");
   return -1;
 }
 
