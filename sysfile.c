@@ -8,9 +8,9 @@
 #include "defs.h"
 #include "param.h"
 #include "stat.h"
-#include "mmu.h"
-#include "proc.h"
-#include "fs.h"
+#include "mmu.h" //
+#include "proc.h" //
+#include "fs.h" //
 #include "spinlock.h"
 #include "sleeplock.h"
 #include "file.h"
@@ -205,7 +205,7 @@ sys_unlink(void)
   }
 
   ilock(dp);
-
+  cprintf("there1\n");
   // Cannot unlink "." or "..".
   if(namecmp(name, ".") == 0 || namecmp(name, "..") == 0)
     goto bad;
@@ -216,6 +216,7 @@ sys_unlink(void)
 
   if(ip->nlink < 1)
     panic("unlink: nlink < 1");
+
   if(ip->type == T_DIR && !isdirempty(ip)){
     iunlockput(ip);
     goto bad;
@@ -232,10 +233,12 @@ sys_unlink(void)
     dp->nlink--;
     iupdate(dp);
   }
+
   if(ip->type == T_SMALLDIR){
     dp->nlink--;
     iupdate(dp);
   }
+
   iunlockput(dp);
 
   ip->nlink--;
