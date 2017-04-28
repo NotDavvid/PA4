@@ -460,9 +460,11 @@ readi(struct inode *ip, char *dst, uint off, uint n)
     n = ip->size - off;
 
   if(ip->type == T_SFILE){
+
     memmove(dst, (char *)(ip->addrs) + off, n);
-    cprintf("small file read\n");
+
   } else {
+
     for(tot=0; tot<n; tot+=m, off+=m, dst+=m){
       bp = bread(ip->dev, bmap(ip, off/BSIZE));
       m = min(n - tot, BSIZE - off%BSIZE);
@@ -498,14 +500,14 @@ writei(struct inode *ip, char *src, uint off, uint n)
     return -1;
   if(off + n > MAXFILE*BSIZE)
     return -1;
-if(ip->type==T_SFILE && off +n>(NDIRECT+1)*sizeof(uint)){
-  cprintf("toobig");
-  return -1;
-}
+
 if(ip->type == T_SFILE){
+
   memmove((char *)(ip->addrs) + off, src, n);
   off += n;
+
 } else{
+
     for(tot=0; tot<n; tot+=m, off+=m, src+=m){
       bp = bread(ip->dev, bmap(ip, off/BSIZE));
       m = min(n - tot, BSIZE - off%BSIZE);
@@ -515,12 +517,16 @@ if(ip->type == T_SFILE){
   }
 }
 
-  if(ip->type == T_SFILE || (n > 0 && off > ip->size)){
-    if(n > 0 && off > ip->size){
+  if(n > 0 && off > ip->size){
+    ip->size = off;
+    iupdate(ip);
+  }
+
+  if(ip->type == T_SFILE && (n > 0 && off > ip->size)){
       ip->size = off;
       iupdate(ip);
-    }
   }
+
   return n;
 }
 
