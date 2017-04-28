@@ -315,7 +315,7 @@ sys_open(void)
 
   if(omode & O_CREATE){
     if(omode & O_SMALLFILE){
-      char name[DIRSIZE];
+      char name[DIRSIZ];
       struct inode *dp = nameiparent(path, name);
       if(dp->type != T_SMALLDIR){
         cprintf("NONONO");
@@ -325,7 +325,7 @@ sys_open(void)
       if((ip = create(path, T_SMALLFILE, 0, 0)) == 0)
         return -1;
     } else {
-      char name[DIRSIZE];
+      char name[DIRSIZ];
       struct inode *dp = nameiparent(path, name);
       if(dp->type == T_SMALLDIR){
         cprintf("nononon");
@@ -417,7 +417,7 @@ sys_mkdir(void)
 }
 
 int
-mkSmallFilesdir(void)
+sys_mkSmallFilesdir(void)
 {
   char *path;
   struct inode *ip;

@@ -11,7 +11,7 @@
 00000000 .debug_loc
 00000000 .debug_ranges
 00000000 ls.c
-00000d60 buf.1123
+00000d60 buf.1125
 00000000 ulib.c
 00000000 printf.c
 00000640 printint
