@@ -243,9 +243,11 @@ cprintf("there6\n");
   }
 
   iunlockput(dp);
-cprintf("there8\n");
+
   ip->nlink--;
+  cprintf("there8\n");
   iupdate(ip);
+  cprintf("there8.5\n");
   iunlockput(ip);
 cprintf("there9\n");
   end_op();
