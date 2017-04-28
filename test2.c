@@ -14,7 +14,8 @@ writetest(void)
 {
   int fd;
   int i;
-	if(mkSmallFilesdir("iputdir") < 0){
+	char* test = "iputdir";
+	if(mkSmallFilesdir(test) < 0){
     printf(stdout, "mkSmallFilesdir failed\n");
     exit();
   }
