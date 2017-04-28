@@ -270,6 +270,8 @@ create(char *path, short type, short major, short minor)
       }
       if(type == T_SMALLDIR && ip->type == T_SMALLDIR)
         return ip;
+      if(type == T_SMALLFILE && ip->type == T_SMALLFILE)
+        return ip;
         cprintf("here8\n");
       iunlockput(ip);
       return 0;
