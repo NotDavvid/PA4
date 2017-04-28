@@ -4,6 +4,7 @@
 #include "stat.h"
 #include "fcntl.h"
 
+
 #define N 100
 char buf[8192];
 int stdout = 1;
@@ -13,7 +14,7 @@ writetest(void)
 {
   int fd;
   int i;
-	if(mkSmallFilesdir("iputdir") < 0){
+	if(sys_mkSmallFilesdir("iputdir") < 0){
     printf(stdout, "mkSmallFilesdir failed\n");
     exit();
   }
