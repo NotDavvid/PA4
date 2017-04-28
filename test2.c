@@ -13,7 +13,14 @@ writetest(void)
 {
   int fd;
   int i;
-
+	if(mkSmallFilesdir("iputdir") < 0){
+    printf(stdout, "mkSmallFilesdir failed\n");
+    exit();
+  }
+  if(chdir("iputdir") < 0){
+    printf(stdout, "chdir iputdir failed\n");
+    exit();
+  }
   printf(stdout, "small file test\n");
   fd = open("small", O_CREATE|O_SMALLFILE|O_RDWR);
   if(fd >= 0){
