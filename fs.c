@@ -324,8 +324,9 @@ iput(struct inode *ip)
     cprintf("free\n");
     // inode has no links and no other references: truncate and free.
     release(&icache.lock);
-    itrunc(ip);
     cprintf("th8\n");
+    itrunc(ip);
+
     ip->type = 0;
     iupdate(ip);
     acquire(&icache.lock);
