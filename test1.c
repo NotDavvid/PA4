@@ -51,7 +51,7 @@ writetest(void)
   }
   close(fd);
 
-  if(unlink("small") < 0){
+  if(unlink("normal") < 0){
     printf(stdout, "unlink normal failed\n");
     exit();
   }
