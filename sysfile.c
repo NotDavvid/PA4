@@ -335,7 +335,7 @@ sys_open(void)
 
 
   if(omode & O_CREATE){
-    if(omode & O_SMALLFILE){
+    if(omode & O_SFILE & O_CREATE){
       char name[DIRSIZ];
       struct inode *dp = nameiparent(path, name);
       if(dp->type != T_SDIR){
