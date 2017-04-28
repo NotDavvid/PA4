@@ -255,7 +255,7 @@ create(char *path, short type, short major, short minor)
     return 0;
   ilock(dp);
   if((ip = dirlookup(dp, name, &off)) != 0){
-    cprintf("test");
+    cprintf("test\n");
       iunlockput(dp);
       ilock(ip);
       if(type == T_FILE && ip->type == T_FILE){
@@ -263,7 +263,7 @@ create(char *path, short type, short major, short minor)
 
         return ip;
       }
-      if(type == T_SMALLFILE && ip->type == T_SMALLFILE)
+      if(type == T_SMALLDIR && ip->type == T_SMALLDIR)
         return ip;
       iunlockput(ip);
       return 0;
