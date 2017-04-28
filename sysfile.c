@@ -254,16 +254,18 @@ create(char *path, short type, short major, short minor)
   if((dp = nameiparent(path, name)) == 0)
     return 0;
   ilock(dp);
-  if((ip = dirlookup(dp, name, &off)) != 0 && ip->type != T_SMALLDIR){
-    cprintf("here\n");
-    iunlockput(dp);
-    ilock(ip);
-    if(type == T_FILE && ip->type == T_FILE)
-      return ip;
-    if(type == T_SMALLFILE && ip->type == T_SMALLFILE)
-      return ip;
-    iunlockput(ip);
-    return 0;
+  if(ip->type != T_SMALLDIR){
+    if(ip = dirlookup(dp, name, &off)) != 0){
+      cprintf("here\n");
+      iunlockput(dp);
+      ilock(ip);
+      if(type == T_FILE && ip->type == T_FILE)
+        return ip;
+      if(type == T_SMALLFILE && ip->type == T_SMALLFILE)
+        return ip;
+      iunlockput(ip);
+      return 0;
+    }
   }
 
   if((ip = ialloc(dp->dev, type)) == 0)
