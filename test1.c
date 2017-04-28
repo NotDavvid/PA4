@@ -5,7 +5,8 @@
 #include "fcntl.h"
 
 #define N 100
-
+char buf[8192];
+int stdout = 1;
 
 void
 writetest(void)
