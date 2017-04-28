@@ -254,13 +254,13 @@ create(char *path, short type, short major, short minor)
   if((dp = nameiparent(path, name)) == 0)
     return 0;
   ilock(dp);
-  cprintf("dirllokup");
+  cprintf("dirllokup\n");
   if((ip = dirlookup(dp, name, &off)) != 0){
     iunlockput(dp);
     ilock(ip);
     if(type == T_FILE && ip->type == T_FILE)
       return ip;
-
+cprintf("SMALLFILEup\n");
     if(type == T_SMALLFILE && ip->type == T_SMALLFILE)
       return ip;
     iunlockput(ip);
