@@ -255,6 +255,7 @@ create(char *path, short type, short major, short minor)
     return 0;
   ilock(dp);
   if((ip = dirlookup(dp, name, &off)) != 0 && ip->type != T_SMALLDIR){
+    cprintf("here\n");
     iunlockput(dp);
     ilock(ip);
     if(type == T_FILE && ip->type == T_FILE)
@@ -283,7 +284,7 @@ create(char *path, short type, short major, short minor)
   }
 
   if(type == T_SMALLDIR){  // Create . and .. entries.
-    cprintf("here\n");
+    cprintf("here2\n");
     dp->nlink++;  // for ".."
     iupdate(dp);
     // No ip->nlink++ for ".": avoid cyclic ref count.
