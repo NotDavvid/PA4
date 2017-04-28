@@ -65,8 +65,7 @@ writetest(void)
     exit();
   }
   printf(stdout, "small file test ok\n");
-}
-*/
+*/}
 int
 main(void)
 {
