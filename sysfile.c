@@ -227,7 +227,7 @@ cprintf("there3\n");
     iunlockput(ip);
     goto bad;
   }
-
+cprintf("there6\n");
   memset(&de, 0, sizeof(de));
   if(writei(dp, (char*)&de, off, sizeof(de)) != sizeof(de))
     panic("unlink: writei");
@@ -237,6 +237,7 @@ cprintf("there3\n");
   }
 
   if(ip->type == T_SMALLDIR){
+    cprintf("there7\n");
     dp->nlink--;
     iupdate(dp);
   }
