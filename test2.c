@@ -15,11 +15,11 @@ writetest(void)
   int i;
 
   printf(stdout, "small file test\n");
-  fd = open("small", O_SMALLFILE|O_RDWR);
+  fd = open("small", O_CREATE|O_SMALLFILE|O_RDWR);
   if(fd >= 0){
     printf(stdout, "create small succeeded; ok\n");
   } else {
-    printf(stdout, "error: creat small failed!\n");
+    printf(stdout, "error: create small failed!\n");
     exit();
   }
 	//printf(stdout, "writing\n");

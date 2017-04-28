@@ -322,8 +322,11 @@ sys_open(void)
         end_op();
         return -1;
       }
-      if((ip = create(path, T_SMALLFILE, 0, 0)) == 0)
+      if((ip = create(path, T_SMALLFILE, 0, 0)) == 0){
+        end_op();
         return -1;
+      }
+
     } else {
       char name[DIRSIZ];
       struct inode *dp = nameiparent(path, name);
@@ -345,6 +348,11 @@ sys_open(void)
     }
     ilock(ip);
     if(ip->type == T_DIR && omode != O_RDONLY){
+      iunlockput(ip);
+      end_op();
+      return -1;
+    }
+    if(ip->type == T_SMALLDIR && omode != O_RDONLY){
       iunlockput(ip);
       end_op();
       return -1;
