@@ -213,7 +213,7 @@ sys_unlink(void)
   if((ip = dirlookup(dp, name, &off)) == 0)
     goto bad;
   ilock(ip);
-
+cprintf("there2\n");
   if(ip->nlink < 1)
     panic("unlink: nlink < 1");
 
