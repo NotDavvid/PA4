@@ -33,12 +33,12 @@ writetest(void)
   }
 
 	printf(stdout, "writing\n");
-	for(i = 0; i < 4; i++){
-    if(write(fd, "aaaa", 4) != 4){
+	for(i = 0; i < 1; i++){
+    if(write(fd, "a", 1) != 1){
       printf(stdout, "error: write aa %d new file failed\n", i);
       exit();
     }
-    if(write(fd, "bbbb", 4) != 4){
+    if(write(fd, "b", 1) != 1){
       printf(stdout, "error: write bb %d new file failed\n", i);
       exit();
     }
@@ -52,8 +52,8 @@ writetest(void)
     printf(stdout, "error: open small failed!\n");
     exit();
   }
-  i = read(fd, buf, 32);
-  if(i == 32){
+  i = read(fd, buf, 2);
+  if(i == 2){
     printf(stdout, "read succeeded ok %d\n", i);
   } else {
     printf(stdout, "read failed %s\n", buf);
