@@ -2,15 +2,16 @@
 #include "user.h"
 #include "syscall.h"
 #include "stat.h"
+#include "stdio.h"
 
 
 int
 main(int argc, char *argv[])
 {
-	const uint N = 2005748363;
-	printf(1, "malloc test\n");
-	malloc(N);
-	currentm();
-    	exit();
+	FILE *fp = NULL;
+	printf(1, "Create a normal file using fopen()\n");
+	fp = fopen("test1.txt", "test1");
+	fclose(fp);
+	exit();
 
 }
