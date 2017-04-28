@@ -83,7 +83,7 @@ bfree(int dev, uint b)
 {
   struct buf *bp;
   int bi, m;
-
+  cprintf("h5\n");
   readsb(dev, &sb);
   bp = bread(dev, BBLOCK(b, sb));
   bi = b % BPB;
