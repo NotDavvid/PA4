@@ -23,7 +23,7 @@ writetest(void)
     exit();
   }
 	//printf(stdout, "writing\n");
-  for(i = 0; i < 100; i++){
+  for(i = 0; i < 10; i++){
     if(write(fd, "aaaaaaaaaa", 10) != 10){
       printf(stdout, "error: write aa %d new file failed\n", i);
       exit();
@@ -35,15 +35,15 @@ writetest(void)
   }
   printf(stdout, "writes ok\n");
   close(fd);
-  fd = open("small", O_RDONLY);
+  fd = open("normal", O_RDONLY);
   if(fd >= 0){
     printf(stdout, "open normal succeeded ok\n");
   } else {
     printf(stdout, "error: open normal failed!\n");
     exit();
   }
-  i = read(fd, buf, 2000);
-  if(i == 2000){
+  i = read(fd, buf, 200);
+  if(i == 200){
     printf(stdout, "read succeeded ok\n");
   } else {
     printf(stdout, "read failed\n");
