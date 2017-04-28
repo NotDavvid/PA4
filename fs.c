@@ -321,6 +321,7 @@ iput(struct inode *ip)
 {
   acquire(&icache.lock);
   if(ip->ref == 1 && (ip->flags & I_VALID) && ip->nlink == 0){
+    cprintf("free\n");
     // inode has no links and no other references: truncate and free.
     release(&icache.lock);
     itrunc(ip);
@@ -338,7 +339,6 @@ void
 iunlockput(struct inode *ip)
 {
   iunlock(ip);
-  cprintf("herer\n");
   iput(ip);
 }
 
