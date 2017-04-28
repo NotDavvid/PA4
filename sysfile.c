@@ -262,7 +262,6 @@ create(char *path, short type, short major, short minor)
     if(type == T_SMALLFILE && ip->type == T_SMALLFILE)
       return ip;
     iunlockput(ip);
-    cprintf("here");
     return 0;
   }
 
