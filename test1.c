@@ -20,17 +20,17 @@ writetest(void)
     printf(stdout, "mkSmallFilesdir failed\n");
     exit();
   }
-  printf(stdout, "succeeded\n");
+  printf(stdout, "\tsucceeded\n");
   printf(stdout, "Change to mkSmallFilesdir\n");
   if(chdir("iputdir") < 0){
     printf(stdout, "chdir iputdir failed\n");
     exit();
   }
-  printf(stdout, "succeeded\n");
+  printf(stdout, "\tsucceeded\n");
   printf(stdout, "Create small file\n");
   fd = open("small", O_CREATE|O_SFILE|O_RDWR);
   if(fd >= 0){
-    printf(stdout, "succeeded\n");
+    printf(stdout, "\tsucceeded\n");
   } else {
     printf(stdout, "error: create small failed!\n");
     exit();
@@ -46,13 +46,14 @@ writetest(void)
       exit();
     }
   }
-  printf(stdout, "succeeded\n");
+  printf(stdout, "\tsucceeded\n");
   printf(stdout, "Closing file\n");
   close(fd);
+  printf(stdout, "\tsucceeded\n");
   printf(stdout, "Opening file\n");
   fd = open("small", O_RDONLY);
   if(fd >= 0){
-    printf(stdout, "succeeded\n");
+    printf(stdout, "\tsucceeded\n");
   } else {
     printf(stdout, "error: open small failed!\n");
     exit();
@@ -60,15 +61,15 @@ writetest(void)
   printf(stdout, "Reading file\n");
   i = read(fd, buf, 8);
   if(i == 8){
-    printf(stdout, "succeeded%d\n", i);
+    printf(stdout, "\tsucceeded\n");
   } else {
-    printf(stdout, "read failed %s\n", buf);
+    printf(stdout, "read failed\n");
     exit();
   }
   printf(stdout, "Closing file\n");
   close(fd);
-	printf(1, "succeeded\n");
-  printf(stdout, "small file test ok\n");
+	printf(1, "\tsucceeded\n");
+  printf(stdout, "small file tests ok\n");
 }
 int
 main(void)
