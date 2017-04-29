@@ -249,7 +249,6 @@ sys_unlink(void)
   iupdate(ip);
 
   iunlockput(ip);
-cprintf("there9\n");
   end_op();
   cprintf("0\n");
   return 0;
@@ -280,7 +279,6 @@ create(char *path, short type, short major, short minor)
         return ip;
       if(type == T_SFILE && ip->type == T_SFILE)
         return ip;
-        cprintf("here8\n");
       iunlockput(ip);
       return 0;
     }
@@ -339,7 +337,7 @@ sys_open(void)
       struct inode *dp = nameiparent(path, name);
 
       if(dp->type != T_SDIR){
-        cprintf("NONONO");
+        panic("cannot create/open this small file in this directory");
         end_op();
         return -1;
       }
@@ -353,7 +351,7 @@ sys_open(void)
       char name[DIRSIZ];
       struct inode *dp = nameiparent(path, name);
       if(dp->type == T_SDIR){
-        cprintf("nononon");
+        panic("cannot create/open this file in Small directory");
         end_op();
         return -1;
       }
