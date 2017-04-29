@@ -335,15 +335,17 @@ sys_open(void)
 
 
   if(omode & O_CREATE){
-    if(omode & O_SFILE & O_CREATE){
+    if(omode & O_SFILE){
       char name[DIRSIZ];
       struct inode *dp = nameiparent(path, name);
+
       if(dp->type != T_SDIR){
         cprintf("NONONO");
         end_op();
         return -1;
       }
-      if((ip = create(path, T_SFILE, 0, 0)) == 0){
+      ip = create(path, T_SFILE, 0, 0);
+      if(ip == 0){
         end_op();
         return -1;
       }
@@ -363,7 +365,8 @@ sys_open(void)
       }
     }
   } else {
-    if((ip = namei(path)) == 0){
+    ip=namei(path);
+    if((ip == 0){
       end_op();
       return -1;
     }
