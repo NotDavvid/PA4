@@ -13,7 +13,6 @@ void
 writetest(void)
 {
   int rf;
-  int i;
 	char* test = "smalldir2";
 	if(mkSmallFilesdir(test) < 0){
     printf(stdout, "mkSmallFilesdir failed\n");
