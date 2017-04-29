@@ -304,7 +304,6 @@ create(char *path, short type, short major, short minor)
   }
 
   if(type == T_SDIR){  // Create . and .. entries.
-    cprintf("here2\n");
     dp->nlink++;  // for ".."
     iupdate(dp);
     // No ip->nlink++ for ".": avoid cyclic ref count.

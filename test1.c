@@ -13,6 +13,7 @@ void
 writetest(void)
 {
   int fd;
+  int rf;
   int i;
 	char* test = "iputdir";
   printf(stdout, "Make mkSmallFilesdir\n");
@@ -50,6 +51,21 @@ writetest(void)
   printf(stdout, "Closing file\n");
   close(fd);
   printf(stdout, "\tsucceeded\n");
+
+/////////////////////////////////////////////////////////////////////////////
+printf(stdout, "------------------------\n");
+printf(stdout, "--Creating Normal File--\n");
+printf(stdout, "---in small directory---\n");
+printf(stdout, "------------------------\n");
+rf = open("normal", O_CREATE|O_RDWR);
+if(rf >= 0){
+  printf(stdout, "\tsucceeded\n");
+} else {
+  printf(stdout, "error: create small failed!\n");
+  exit();
+}
+/////////////////////////////////////////////////////////////////////////////
+
   printf(stdout, "Opening file\n");
   fd = open("small", O_RDONLY);
   if(fd >= 0){
