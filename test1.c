@@ -13,7 +13,6 @@ void
 writetest(void)
 {
   int fd;
-  int rf;
   int i;
 	char* test = "smalldir1";
   printf(stdout, "Make mkSmallFilesdir\n");
