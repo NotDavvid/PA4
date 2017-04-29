@@ -15,7 +15,7 @@ writetest(void)
   int fd;
   int rf;
   int i;
-	char* test = "iputdir";
+	char* test = "smalldir1";
   printf(stdout, "Make mkSmallFilesdir\n");
 	if(mkSmallFilesdir(test) < 0){
     printf(stdout, "mkSmallFilesdir failed\n");
@@ -23,7 +23,7 @@ writetest(void)
   }
   printf(stdout, "\tsucceeded\n");
   printf(stdout, "Change to mkSmallFilesdir\n");
-  if(chdir("iputdir") < 0){
+  if(chdir(test) < 0){
     printf(stdout, "chdir iputdir failed\n");
     exit();
   }
@@ -51,20 +51,6 @@ writetest(void)
   printf(stdout, "Closing file\n");
   close(fd);
   printf(stdout, "\tsucceeded\n");
-
-/////////////////////////////////////////////////////////////////////////////
-printf(stdout, "------------------------\n");
-printf(stdout, "--Creating Normal File--\n");
-printf(stdout, "---in small directory---\n");
-printf(stdout, "------------------------\n");
-rf = open("normal", O_CREATE|O_RDWR);
-if(rf >= 0){
-  printf(stdout, "\tsucceeded\n");
-} else {
-  printf(stdout, "error: create small failed!\n");
-  exit();
-}
-/////////////////////////////////////////////////////////////////////////////
 
   printf(stdout, "Opening file\n");
   fd = open("small", O_RDONLY);
