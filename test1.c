@@ -30,7 +30,7 @@ writetest(void)
   printf(stdout, "Create small file\n");
   fd = open("small", O_CREATE|O_SFILE|O_RDWR);
   if(fd >= 0){
-    printf(stdout, "create small succeeded; ok\n");
+    printf(stdout, "succeeded\n");
   } else {
     printf(stdout, "error: create small failed!\n");
     exit();
@@ -46,13 +46,13 @@ writetest(void)
       exit();
     }
   }
-  printf(stdout, "Writing to file\n");
+  printf(stdout, "succeeded\n");
   printf(stdout, "Closing file\n");
   close(fd);
   printf(stdout, "Opening file\n");
   fd = open("small", O_RDONLY);
   if(fd >= 0){
-    printf(stdout, "open small succeeded ok\n");
+    printf(stdout, "succeeded\n");
   } else {
     printf(stdout, "error: open small failed!\n");
     exit();
@@ -60,14 +60,14 @@ writetest(void)
   printf(stdout, "Reading file\n");
   i = read(fd, buf, 8);
   if(i == 8){
-    printf(stdout, "read succeeded ok %d\n", i);
+    printf(stdout, "succeeded%d\n", i);
   } else {
     printf(stdout, "read failed %s\n", buf);
     exit();
   }
   printf(stdout, "Closing file\n");
   close(fd);
-	printf(1, "close succeeded\n");
+	printf(1, "succeeded\n");
   printf(stdout, "small file test ok\n");
 }
 int
