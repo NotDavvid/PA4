@@ -14,7 +14,7 @@ writetest(void)
 {
   int rf;
 	char* test = "normdir1";
-	if(mkdir(test) < 0){
+	if(mkdir("normdir1") < 0){
     printf(stdout, "mkdir failed\n");
     exit();
   }
