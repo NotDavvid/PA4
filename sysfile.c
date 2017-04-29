@@ -337,7 +337,7 @@ sys_open(void)
       struct inode *dp = nameiparent(path, name);
 
       if(dp->type != T_SDIR){
-        cprintf("cannot create/open this small file in this directory");
+        cprintf("cannot create/open this small file in this directory\n");
         end_op();
         return -1;
       }
@@ -351,7 +351,7 @@ sys_open(void)
       char name[DIRSIZ];
       struct inode *dp = nameiparent(path, name);
       if(dp->type == T_SDIR){
-        cprintf("cannot create/open this file in Small directory");
+        cprintf("cannot create/open this file in Small directory\n");
         end_op();
         return -1;
       }
