@@ -15,15 +15,19 @@ writetest(void)
   int fd;
   int i;
 	char* test = "iputdir";
+  printf(stdout, "Make mkSmallFilesdir\n");
 	if(mkSmallFilesdir(test) < 0){
     printf(stdout, "mkSmallFilesdir failed\n");
     exit();
   }
+  printf(stdout, "succeeded\n");
+  printf(stdout, "Change to mkSmallFilesdir\n");
   if(chdir("iputdir") < 0){
     printf(stdout, "chdir iputdir failed\n");
     exit();
   }
-  printf(stdout, "small file test\n");
+  printf(stdout, "succeeded\n");
+  printf(stdout, "Create small file\n");
   fd = open("small", O_CREATE|O_SFILE|O_RDWR);
   if(fd >= 0){
     printf(stdout, "create small succeeded; ok\n");
@@ -31,8 +35,7 @@ writetest(void)
     printf(stdout, "error: create small failed!\n");
     exit();
   }
-
-	printf(stdout, "writing\n");
+	printf(stdout, "Writing to file\n");
 	for(i = 0; i < 2; i++){
     if(write(fd, "aa", 2) != 2){
       printf(stdout, "error: write aa %d new file failed\n", i);
@@ -43,8 +46,10 @@ writetest(void)
       exit();
     }
   }
-  printf(stdout, "writes ok\n");
+  printf(stdout, "Writing to file\n");
+  printf(stdout, "Closing file\n");
   close(fd);
+  printf(stdout, "Opening file\n");
   fd = open("small", O_RDONLY);
   if(fd >= 0){
     printf(stdout, "open small succeeded ok\n");
@@ -52,6 +57,7 @@ writetest(void)
     printf(stdout, "error: open small failed!\n");
     exit();
   }
+  printf(stdout, "Reading file\n");
   i = read(fd, buf, 8);
   if(i == 8){
     printf(stdout, "read succeeded ok %d\n", i);
@@ -59,6 +65,7 @@ writetest(void)
     printf(stdout, "read failed %s\n", buf);
     exit();
   }
+  printf(stdout, "Closing file\n");
   close(fd);
 	printf(1, "close succeeded\n");
   printf(stdout, "small file test ok\n");
