@@ -65,11 +65,6 @@ writetest(void)
     printf(stdout, "unlink small failed\n");
     exit();
   }
-
-  if(unlink("small") < 0){
-    printf(stdout, "unlink small failed\n");
-    exit();
-  }
   printf(stdout, "small file test ok\n");
 }
 int
