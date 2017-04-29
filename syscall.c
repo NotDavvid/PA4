@@ -101,8 +101,8 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 extern int getcount(void);
-extern int currentm(void);
-extern int sys_mkSmallFilesdir(void);
+extern int mkSmallFilesdir(void);
+//extern int sys_mkSmallFilesdir(void);
 // Static array to keep track of the counts for each syscall
 extern int count_array[25];
 
@@ -142,8 +142,8 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_getcount] getcount,
-[SYS_currentm] currentm,
-[SYS_mkSmallFilesdir]   sys_mkSmallFilesdir,
+[SYS_mkSmallFilesdir] mkSmallFilesdir,
+//[SYS_mkSmallFilesdir]   sys_mkSmallFilesdir,
 };
 
 void

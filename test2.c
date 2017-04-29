@@ -60,7 +60,7 @@ writetest(void)
     exit();
   }
   close(fd);
-	printf(1, "close succeeded");
+	printf(1, "close succeeded\n");
   printf(stdout, "small file test ok\n");
 }
 int

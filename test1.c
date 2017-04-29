@@ -4,6 +4,7 @@
 #include "stat.h"
 #include "fcntl.h"
 
+
 #define N 100
 char buf[8192];
 int stdout = 1;
@@ -13,59 +14,55 @@ writetest(void)
 {
   int fd;
   int i;
-  char* test = "iputdirN";
-  if(mkdir(test) < 0){
+	char* test = "iputdir";
+	if(mkSmallFilesdir(test) < 0){
     printf(stdout, "mkSmallFilesdir failed\n");
     exit();
   }
-  if(chdir("iputdirN") < 0){
+  if(chdir("iputdir") < 0){
     printf(stdout, "chdir iputdir failed\n");
     exit();
   }
-  printf(stdout, "normal file test\n");
-  fd = open("normal", O_CREATE|O_RDWR);
+  printf(stdout, "small file test\n");
+  fd = open("small", O_CREATE|O_SFILE|O_RDWR);
   if(fd >= 0){
-    printf(stdout, "create normal succeeded; ok\n");
+    printf(stdout, "create small succeeded; ok\n");
   } else {
-    printf(stdout, "error: creat normal failed!\n");
+    printf(stdout, "error: create small failed!\n");
     exit();
   }
-	//printf(stdout, "writing\n");
-  for(i = 0; i < 10; i++){
-    if(write(fd, "aaaaaaaaaa", 10) != 10){
+
+	printf(stdout, "writing\n");
+	for(i = 0; i < 2; i++){
+    if(write(fd, "aa", 2) != 2){
       printf(stdout, "error: write aa %d new file failed\n", i);
       exit();
     }
-    if(write(fd, "bbbbbbbbbb", 10) != 10){
+    if(write(fd, "bb", 2) != 2){
       printf(stdout, "error: write bb %d new file failed\n", i);
       exit();
     }
   }
   printf(stdout, "writes ok\n");
   close(fd);
-  fd = open("normal", O_RDONLY);
+  fd = open("small", O_RDONLY);
   if(fd >= 0){
-    printf(stdout, "open normal succeeded ok\n");
+    printf(stdout, "open small succeeded ok\n");
   } else {
-    printf(stdout, "error: open normal failed!\n");
+    printf(stdout, "error: open small failed!\n");
     exit();
   }
-  i = read(fd, buf, 200);
-  if(i == 200){
-    printf(stdout, "read succeeded ok%s\n",buf);
+  i = read(fd, buf, 8);
+  if(i == 8){
+    printf(stdout, "read succeeded ok %d\n", i);
   } else {
-    printf(stdout, "read failed\n");
+    printf(stdout, "read failed %s\n", buf);
     exit();
   }
   close(fd);
-
-  if(unlink("normal") < 0){
-    printf(stdout, "unlink normal failed\n");
-    exit();
-  }
-  printf(stdout, "normal file test ok\n");
+	printf(1, "close succeeded\n");
+  printf(stdout, "small file test ok\n");
 }
-
 int
 main(void)
 {
