@@ -366,7 +366,7 @@ sys_open(void)
     }
   } else {
     ip=namei(path);
-    if((ip == 0){
+    if(ip == 0){
       end_op();
       return -1;
     }
